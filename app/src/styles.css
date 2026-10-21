@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Brand: Nigerian green (#008751) with warm, earthy neutrals. */
+@theme {
+  --color-brand-50: #e8f6ef;
+  --color-brand-100: #c6e9d6;
+  --color-brand-200: #93d4b4;
+  --color-brand-300: #5bbb8d;
+  --color-brand-400: #26a06a;
+  --color-brand-500: #008751;
+  --color-brand-600: #007446;
+  --color-brand-700: #005e39;
+  --color-brand-800: #00492d;
+  --color-brand-900: #003520;
+
+  --color-earth-50: #f6f7f2;
+  --color-earth-100: #ecede4;
+  --color-earth-200: #dcdccd;
+  --color-earth-400: #9a9783;
+  --color-earth-600: #5f5c4c;
+  --color-earth-800: #2f2e25;
+  --color-earth-900: #1c1b15;
+
+  --color-sun-100: #fdf1d3;
+  --color-sun-500: #e0a100;
+  --color-sun-700: #8a5a00;
+  --color-clay-100: #fbe3dc;
+  --color-clay-500: #d0532c;
+  --color-clay-700: #8f2f13;
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-earth-50 text-earth-900 antialiased;
+  }
+}

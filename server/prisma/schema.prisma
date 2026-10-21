@@ -1,0 +1,284 @@
+// AgroIntel data model.
+// Countries, regions, crops, calendars and diseases are data — never hardcode them,
+// so new countries/crops can be added by seeding rather than code changes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  FARMER
+  EXPERT
+  ADMIN
+}
+
+enum ScanStatus {
+  REJECTED_QUALITY
+  LOW_CONFIDENCE
+  CONFIDENT
+  PENDING_REVIEW
+  VERIFIED
+}
+
+enum ReviewStatus {
+  OPEN
+  RESOLVED
+}
+
+enum AlertType {
+  WEATHER
+  DISEASE
+  PEST
+  PLANTING
+  HARVEST
+  HEALTH
+}
+
+// ---------- People ----------
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(FARMER)
+  countryCode  String   @default("NG")
+  language     String   @default("en")
+  createdAt    DateTime @default(now())
+
+  country       Country        @relation(fields: [countryCode], references: [code])
+  farms         Farm[]
+  scans         Scan[]
+  alerts        Alert[]
+  conversations Conversation[]
+  reviews       ExpertReview[] @relation("Reviewer")
+}
+
+// ---------- Localisation ----------
+
+model Country {
+  code      String   @id // ISO 3166-1 alpha-2
+  name      String
+  languages String[]
+  seasons   Json // e.g. [{ "name": "Rainy", "months": [4,5,...] }]
+
+  regions   Region[]
+  users     User[]
+  calendars CropCalendar[]
+}
+
+model Region {
+  id          String @id @default(cuid())
+  countryCode String
+  name        String
+  zone        String // agro-ecological zone, e.g. "Guinea Savanna"
+  lat         Float
+  lon         Float
+
+  country   Country        @relation(fields: [countryCode], references: [code])
+  calendars CropCalendar[]
+
+  @@unique([countryCode, name])
+}
+
+// ---------- Agricultural knowledge ----------
+
+model Crop {
+  key           String   @id // e.g. "maize" — matches ML label prefix
+  name          String
+  localNames    Json // { "yo": "Agbado", "ha": "Masara", "ig": "Ọka" }
+  category      String // cereal, tuber, legume, vegetable, tree, fruit
+  growingDaysMin Int
+  growingDaysMax Int
+  waterNeed     String // low | medium | high
+  tempMinC      Float
+  tempMaxC      Float
+  rainfallMinMm Float // annual
+  rainfallMaxMm Float
+  phMin         Float
+  phMax         Float
+  soilTypes     String[]
+  pestRisks     String[]
+
+  diseases  Disease[]
+  calendars CropCalendar[]
+  farmCrops FarmCrop[]
+}
+
+model CropCalendar {
+  id            String  @id @default(cuid())
+  cropKey       String
+  countryCode   String
+  regionId      String? // null = applies country-wide
+  plantMonths   Int[]
+  harvestMonths Int[]
+  notes         String?
+
+  crop    Crop    @relation(fields: [cropKey], references: [key])
+  country Country @relation(fields: [countryCode], references: [code])
+  region  Region? @relation(fields: [regionId], references: [id])
+}
+
+model Disease {
+  key         String   @id // ML label, e.g. "tomato__early_blight"
+  cropKey     String
+  name        String
+  localNames  Json     @default("{}")
+  isHealthy   Boolean  @default(false)
+  summary     String
+  symptoms    String[]
+  causes      String[]
+  treatment   String[]
+  prevention  String[]
+  monitoring  String[]
+  conditions  String[] // environmental conditions that favour it
+  regions     String[]
+  similarKeys String[]
+  imageUrls   String[]
+
+  crop Crop @relation(fields: [cropKey], references: [key])
+}
+
+// ---------- Farms ----------
+
+model Farm {
+  id           String   @id @default(cuid())
+  ownerId      String
+  name         String
+  lat          Float
+  lon          Float
+  locationName String?
+  sizeHa       Float?
+  soilType     String?
+  soil         Json? // { ph, nitrogen, phosphorus, potassium, organicMatter }
+  imageUrls    String[]
+  createdAt    DateTime @default(now())
+
+  owner  User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  crops  FarmCrop[]
+  scans  Scan[]
+  alerts Alert[]
+}
+
+model FarmCrop {
+  id                String    @id @default(cuid())
+  farmId            String
+  cropKey           String
+  plantedAt         DateTime?
+  expectedHarvestAt DateTime?
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  crop Crop @relation(fields: [cropKey], references: [key])
+}
+
+// ---------- AI predictions ----------
+
+model ModelVersion {
+  version    String   @id // e.g. "disease-effnetb0-2026.10.1"
+  task       String // "disease" | "pest"
+  metrics    Json // accuracy, macro-F1, per-class report
+  isActive   Boolean  @default(false)
+  deployedAt DateTime @default(now())
+
+  scans Scan[]
+}
+
+model Scan {
+  id             String     @id @default(cuid())
+  userId         String
+  farmId         String?
+  cropKey        String?
+  imageUrl       String
+  lat            Float?
+  lon            Float?
+  description    String?
+  status         ScanStatus
+  predictedLabel String?
+  confidence     Float?
+  severity       String?
+  candidates     Json // top-k [{ label, confidence }]
+  quality        Json
+  modelVersionId String?
+  createdAt      DateTime   @default(now())
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  farm         Farm?         @relation(fields: [farmId], references: [id], onDelete: SetNull)
+  modelVersion ModelVersion? @relation(fields: [modelVersionId], references: [version])
+  feedback     ScanFeedback?
+  review       ExpertReview?
+
+  @@index([status])
+  @@index([userId, createdAt])
+}
+
+model ScanFeedback {
+  id             String   @id @default(cuid())
+  scanId         String   @unique
+  isCorrect      Boolean
+  correctedLabel String?
+  notes          String?
+  createdAt      DateTime @default(now())
+
+  scan Scan @relation(fields: [scanId], references: [id], onDelete: Cascade)
+}
+
+model ExpertReview {
+  id              String       @id @default(cuid())
+  scanId          String       @unique
+  reviewerId      String?
+  status          ReviewStatus @default(OPEN)
+  confirmedLabel  String?
+  notes           String?
+  recommendations String[]
+  // Verified cases flow back into the training set.
+  useForTraining  Boolean      @default(false)
+  createdAt       DateTime     @default(now())
+  resolvedAt      DateTime?
+
+  scan     Scan  @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  reviewer User? @relation("Reviewer", fields: [reviewerId], references: [id])
+}
+
+// ---------- Alerts & assistant ----------
+
+model Alert {
+  id        String    @id @default(cuid())
+  userId    String
+  farmId    String?
+  type      AlertType
+  level     String // info | watch | warning
+  title     String
+  body      String
+  dedupeKey String?
+  createdAt DateTime  @default(now())
+  readAt    DateTime?
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  farm Farm? @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dedupeKey])
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  userId    String
+  createdAt DateTime  @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages Message[]
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String // user | assistant
+  content        String
+  createdAt      DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}

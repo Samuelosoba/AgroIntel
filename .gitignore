@@ -1,0 +1,28 @@
+node_modules/
+dist/
+build/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# uploads & generated
+server/uploads/*
+!server/uploads/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# ml data & weights (track via DVC / object storage, not git)
+ml/data/raw/*
+ml/data/processed/*
+ml/runs/*
+!ml/data/raw/.gitkeep
+!ml/data/processed/.gitkeep
+!ml/runs/.gitkeep
+ai/artifacts/*
+!ai/artifacts/.gitkeep

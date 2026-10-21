@@ -1,0 +1,23 @@
+# Map folder names from public datasets onto AgroIntel labels (<crop>__<condition>).
+# Labels must match `Disease.key` in server/prisma/data/diseases.json.
+# Unmapped folders are skipped by `prepare` with a warning.
+
+# PlantVillage
+Tomato___Early_blight: tomato__early_blight
+Tomato___Late_blight: tomato__late_blight
+Tomato___Bacterial_spot: tomato__bacterial_spot
+Tomato___Septoria_leaf_spot: tomato__septoria_leaf_spot
+Tomato___Tomato_Yellow_Leaf_Curl_Virus: tomato__yellow_leaf_curl_virus
+Tomato___healthy: tomato__healthy
+Corn_(maize)___Northern_Leaf_Blight: maize__northern_leaf_blight
+Corn_(maize)___Common_rust_: maize__common_rust
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot: maize__gray_leaf_spot
+Corn_(maize)___healthy: maize__healthy
+Pepper,_bell___Bacterial_spot: pepper__bacterial_spot
+Pepper,_bell___healthy: pepper__healthy
+
+# Cassava (Makerere / Kaggle cassava leaf disease)
+CMD: cassava__mosaic_disease
+CBSD: cassava__brown_streak_disease
+CBB: cassava__bacterial_blight
+Healthy: cassava__healthy

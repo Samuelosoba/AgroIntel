@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: agrointel
+      POSTGRES_PASSWORD: agrointel
+      POSTGRES_DB: agrointel
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+
+  ai:
+    build: ./ai
+    environment:
+      MODEL_DIR: /models
+    volumes: ["./ai/artifacts:/models:ro"]
+    ports: ["8000:8000"]
+
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    env_file: ./server/.env
+    environment:
+      DATABASE_URL: postgresql://agrointel:agrointel@db:5432/agrointel
+      AI_SERVICE_URL: http://ai:8000
+    depends_on: [db, ai]
+    ports: ["4000:4000"]
+
+volumes:
+  pgdata:

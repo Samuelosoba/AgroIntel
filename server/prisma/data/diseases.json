@@ -1,0 +1,177 @@
+[
+  {
+    "key": "tomato__early_blight", "crop": "tomato", "name": "Early Blight",
+    "summary": "A fungal disease (Alternaria) that starts on older, lower leaves and spreads upward.",
+    "symptoms": ["Brown spots with rings like a target on older leaves", "Yellowing around the spots", "Lower leaves dry and drop"],
+    "causes": ["Fungus Alternaria solani", "Spores splash from soil and old plant debris", "Warm, humid weather with leaf wetness"],
+    "treatment": ["Remove and destroy badly affected leaves", "Spray a recommended fungicide (e.g. mancozeb or chlorothalonil) following label rates", "Repeat sprays every 7–10 days during wet weather"],
+    "prevention": ["Rotate away from tomato, pepper and garden egg for 2–3 years", "Mulch to stop soil splashing onto leaves", "Stake plants and space them for airflow", "Water at the base, not over leaves"],
+    "monitoring": ["Check lower leaves twice a week", "Rescan in 7 days to see if spots are spreading"],
+    "conditions": ["24–29°C", "High humidity", "Frequent rain or overhead irrigation"],
+    "similarKeys": ["tomato__septoria_leaf_spot", "tomato__late_blight"]
+  },
+  {
+    "key": "tomato__late_blight", "crop": "tomato", "name": "Late Blight",
+    "summary": "A fast-spreading water mould disease that can destroy a tomato field within days in cool, wet weather.",
+    "symptoms": ["Large greasy, dark patches on leaves", "White fuzzy growth under leaves in humid mornings", "Brown, firm rot on fruit"],
+    "causes": ["Water mould Phytophthora infestans", "Spores carried by wind and rain", "Cool nights with long leaf wetness"],
+    "treatment": ["Remove and bury or burn infected plants immediately", "Spray a systemic fungicide (e.g. metalaxyl + mancozeb) following label rates", "Warn neighbouring farms — it spreads by wind"],
+    "prevention": ["Plant in the dry season where possible", "Avoid planting near potato fields", "Use tolerant varieties", "Keep good spacing and airflow"],
+    "monitoring": ["Inspect daily during cool, rainy spells", "Rescan in 3 days"],
+    "conditions": ["15–22°C nights", "Long periods of leaf wetness", "Plateau and highland areas"],
+    "similarKeys": ["tomato__early_blight"]
+  },
+  {
+    "key": "tomato__bacterial_spot", "crop": "tomato", "name": "Bacterial Spot",
+    "summary": "A bacterial disease causing small dark spots on leaves and scabby spots on fruit.",
+    "symptoms": ["Small, dark, water-soaked spots on leaves", "Spots may have a yellow halo", "Raised, scabby spots on fruit"],
+    "causes": ["Xanthomonas bacteria", "Infected seed or transplants", "Rain splash and handling wet plants"],
+    "treatment": ["Remove badly affected leaves", "Copper-based bactericide sprays can slow spread", "Avoid working in the field when plants are wet"],
+    "prevention": ["Use certified clean seed", "Rotate crops", "Disinfect tools and stakes"],
+    "monitoring": ["Check new leaves after each rain", "Rescan in 7 days"],
+    "conditions": ["Warm (24–30°C)", "Driving rain", "Overhead irrigation"],
+    "similarKeys": ["tomato__septoria_leaf_spot", "tomato__early_blight"]
+  },
+  {
+    "key": "tomato__septoria_leaf_spot", "crop": "tomato", "name": "Septoria Leaf Spot",
+    "summary": "A fungal leaf spot that causes many small round spots and early leaf loss.",
+    "symptoms": ["Many small round spots with grey centres and dark edges", "Tiny black dots inside the spots", "Lower leaves yellow and fall"],
+    "causes": ["Fungus Septoria lycopersici", "Survives on old crop debris", "Spread by rain splash"],
+    "treatment": ["Remove affected lower leaves", "Spray a recommended fungicide (e.g. chlorothalonil or mancozeb)"],
+    "prevention": ["Clear and destroy crop debris after harvest", "Rotate crops", "Mulch and water at the base"],
+    "monitoring": ["Rescan in 7 days"],
+    "conditions": ["Wet, warm weather"],
+    "similarKeys": ["tomato__early_blight", "tomato__bacterial_spot"]
+  },
+  {
+    "key": "tomato__yellow_leaf_curl_virus", "crop": "tomato", "name": "Tomato Yellow Leaf Curl Virus",
+    "summary": "A virus spread by whiteflies that stunts plants and sharply reduces fruit set.",
+    "symptoms": ["Leaves curl upward and become small and yellow at the edges", "Plants are stunted and bushy", "Flowers drop; few fruits"],
+    "causes": ["Begomovirus spread by whiteflies (Bemisia tabaci)"],
+    "treatment": ["There is no cure — uproot and destroy infected plants early", "Control whiteflies with recommended insecticides or neem extract", "Use yellow sticky traps"],
+    "prevention": ["Use tolerant varieties", "Raise seedlings under insect netting", "Remove weeds that host whiteflies"],
+    "monitoring": ["Check undersides of leaves for whiteflies", "Rescan new plants weekly"],
+    "conditions": ["Hot, dry season with high whitefly numbers"],
+    "similarKeys": []
+  },
+  {
+    "key": "tomato__healthy", "crop": "tomato", "name": "Healthy Tomato", "isHealthy": true,
+    "summary": "No disease detected on this tomato leaf.",
+    "symptoms": [], "causes": [], "treatment": [],
+    "prevention": ["Keep scouting twice a week", "Maintain good spacing, staking and mulching"],
+    "monitoring": ["Rescan if you see new spots, curling or yellowing"],
+    "conditions": [], "similarKeys": []
+  },
+  {
+    "key": "maize__northern_leaf_blight", "crop": "maize", "name": "Northern Leaf Blight",
+    "summary": "A fungal disease producing long, cigar-shaped grey-brown lesions on maize leaves.",
+    "symptoms": ["Long (2–15 cm) cigar-shaped grey-green to tan lesions", "Lesions start on lower leaves", "Severe cases dry out whole leaves before grain fill"],
+    "causes": ["Fungus Exserohilum turcicum", "Survives in maize residue", "Moderate temperatures with heavy dew"],
+    "treatment": ["Fungicide is worthwhile only if lesions reach the ear leaf before tasselling", "Follow label rates of a recommended triazole or strobilurin"],
+    "prevention": ["Plant resistant varieties", "Rotate with legumes", "Bury or remove crop residue"],
+    "monitoring": ["Check the ear leaf around tasselling", "Rescan in 10 days"],
+    "conditions": ["18–27°C", "Heavy dew", "Guinea Savanna wet season"],
+    "similarKeys": ["maize__gray_leaf_spot"]
+  },
+  {
+    "key": "maize__common_rust", "crop": "maize", "name": "Common Rust",
+    "summary": "A fungal disease producing rusty brown powdery pustules on both sides of maize leaves.",
+    "symptoms": ["Small, raised, brick-red to brown pustules", "Powdery spores rub off on fingers", "Pustules on both leaf surfaces"],
+    "causes": ["Fungus Puccinia sorghi", "Spores blown in by wind"],
+    "treatment": ["Usually no spray needed on tolerant varieties", "On susceptible varieties with early heavy infection, use a recommended fungicide"],
+    "prevention": ["Plant resistant hybrids", "Avoid very late planting"],
+    "monitoring": ["Rescan in 10 days"],
+    "conditions": ["Cool, humid weather", "Highlands such as the Jos Plateau"],
+    "similarKeys": []
+  },
+  {
+    "key": "maize__gray_leaf_spot", "crop": "maize", "name": "Gray Leaf Spot",
+    "summary": "A fungal disease producing narrow, rectangular grey lesions limited by leaf veins.",
+    "symptoms": ["Rectangular tan to grey lesions running parallel to veins", "Lesions merge and kill leaves"],
+    "causes": ["Fungus Cercospora zeae-maydis", "Survives on residue", "Long periods of high humidity"],
+    "treatment": ["Use a recommended fungicide if lesions spread up the plant before silking"],
+    "prevention": ["Rotate crops", "Plant tolerant varieties", "Manage residue"],
+    "monitoring": ["Rescan in 10 days"],
+    "conditions": ["Warm, humid, overcast weather"],
+    "similarKeys": ["maize__northern_leaf_blight"]
+  },
+  {
+    "key": "maize__streak_virus", "crop": "maize", "name": "Maize Streak Virus",
+    "summary": "A leafhopper-spread virus causing broken yellow streaks along maize leaves.",
+    "symptoms": ["Narrow broken yellow-white streaks along leaf veins", "Stunted plants when infected young", "Poorly filled cobs"],
+    "causes": ["Maize streak virus spread by Cicadulina leafhoppers"],
+    "treatment": ["There is no cure — uproot badly stunted young plants"],
+    "prevention": ["Plant MSV-resistant varieties", "Plant early and at the same time as neighbours", "Control grassy weeds"],
+    "monitoring": ["Check seedlings in the first 4 weeks"],
+    "conditions": ["Late planting", "Dry spells early in the season"],
+    "similarKeys": []
+  },
+  {
+    "key": "maize__healthy", "crop": "maize", "name": "Healthy Maize", "isHealthy": true,
+    "summary": "No disease detected on this maize leaf.",
+    "symptoms": [], "causes": [], "treatment": [],
+    "prevention": ["Scout for fall armyworm in the leaf funnel weekly"],
+    "monitoring": ["Rescan if you see spots, streaks or holes"],
+    "conditions": [], "similarKeys": []
+  },
+  {
+    "key": "cassava__mosaic_disease", "crop": "cassava", "name": "Cassava Mosaic Disease",
+    "summary": "A whitefly-spread virus disease, the most damaging cassava disease in Nigeria.",
+    "symptoms": ["Yellow and green mosaic pattern on leaves", "Leaves twisted and reduced in size", "Stunted plants with small roots"],
+    "causes": ["Cassava mosaic begomoviruses", "Infected stem cuttings", "Whitefly (Bemisia tabaci)"],
+    "treatment": ["There is no cure — uproot and destroy infected plants early (roguing)", "Do not take cuttings from infected plants"],
+    "prevention": ["Plant CMD-resistant improved varieties", "Use clean cuttings from healthy fields", "Control whiteflies"],
+    "monitoring": ["Check young plants 1–3 months after planting"],
+    "conditions": ["High whitefly populations"],
+    "similarKeys": ["cassava__brown_streak_disease"]
+  },
+  {
+    "key": "cassava__brown_streak_disease", "crop": "cassava", "name": "Cassava Brown Streak Disease",
+    "summary": "A virus disease that causes leaf yellowing and dry brown rot inside the roots.",
+    "symptoms": ["Yellow patches along secondary leaf veins", "Brown streaks on green stems", "Dry, brown, corky rot inside roots"],
+    "causes": ["Cassava brown streak viruses", "Infected cuttings", "Whitefly"],
+    "treatment": ["Uproot and destroy infected plants", "Harvest early if roots are still usable"],
+    "prevention": ["Use certified clean planting material", "Report suspected cases to extension officers — it is a quarantine concern in West Africa"],
+    "monitoring": ["Cut a root open at harvest to check for brown rot"],
+    "conditions": [],
+    "similarKeys": ["cassava__mosaic_disease"]
+  },
+  {
+    "key": "cassava__bacterial_blight", "crop": "cassava", "name": "Cassava Bacterial Blight",
+    "summary": "A bacterial disease causing angular leaf spots, wilting and stem dieback.",
+    "symptoms": ["Angular, water-soaked leaf spots", "Leaves wilt and fall", "Gum ooze and dieback from stem tips"],
+    "causes": ["Xanthomonas axonopodis pv. manihotis", "Infected cuttings and tools", "Rain splash"],
+    "treatment": ["Cut out and burn affected shoots", "Disinfect cutting tools"],
+    "prevention": ["Plant resistant varieties", "Use clean cuttings", "Rotate fields"],
+    "monitoring": ["Rescan after heavy rains"],
+    "conditions": ["Wet season", "Warm temperatures"],
+    "similarKeys": []
+  },
+  {
+    "key": "cassava__healthy", "crop": "cassava", "name": "Healthy Cassava", "isHealthy": true,
+    "summary": "No disease detected on this cassava leaf.",
+    "symptoms": [], "causes": [], "treatment": [],
+    "prevention": ["Keep using clean cuttings and resistant varieties"],
+    "monitoring": ["Rescan if you see mosaic patterns or leaf twisting"],
+    "conditions": [], "similarKeys": []
+  },
+  {
+    "key": "pepper__bacterial_spot", "crop": "pepper", "name": "Bacterial Spot",
+    "summary": "A bacterial disease that spots leaves and fruit and causes leaf drop.",
+    "symptoms": ["Small water-soaked spots that turn brown", "Yellowing leaves that drop", "Raised scabby spots on fruit"],
+    "causes": ["Xanthomonas bacteria", "Infected seed", "Rain splash"],
+    "treatment": ["Remove badly affected leaves", "Copper-based sprays can slow spread"],
+    "prevention": ["Use clean seed", "Rotate crops away from tomato and pepper"],
+    "monitoring": ["Rescan in 7 days"],
+    "conditions": ["Warm, wet weather"],
+    "similarKeys": []
+  },
+  {
+    "key": "pepper__healthy", "crop": "pepper", "name": "Healthy Pepper", "isHealthy": true,
+    "summary": "No disease detected on this pepper leaf.",
+    "symptoms": [], "causes": [], "treatment": [],
+    "prevention": ["Watch for aphids and thrips under leaves"],
+    "monitoring": ["Rescan if you see spots or curling"],
+    "conditions": [], "similarKeys": []
+  }
+]

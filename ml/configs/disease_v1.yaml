@@ -1,0 +1,28 @@
+# Disease classifier — baseline config.
+task: disease
+arch: efficientnet_b0        # any timm model: mobilenetv3_large_100 (on-device), convnext_tiny, vit_small_patch16_224
+pretrained: true
+input_size: 224
+
+data:
+  raw_dir: data/raw          # data/raw/<crop>__<condition>/*.jpg
+  processed_dir: data/processed
+  split: [0.70, 0.15, 0.15]  # train / val / test, stratified per class
+  min_side_px: 128
+  min_images_per_class: 30
+  dedupe_hamming: 4          # perceptual-hash distance treated as duplicate
+
+train:
+  epochs: 30
+  batch_size: 32
+  lr: 0.0003
+  weight_decay: 0.05
+  label_smoothing: 0.1
+  balance: weighted_sampler  # weighted_sampler | class_weights | none
+  early_stop_patience: 6     # epochs without macro-F1 improvement
+  num_workers: 4
+  seed: 42
+
+output:
+  runs_dir: runs
+  export_dir: ../ai/artifacts

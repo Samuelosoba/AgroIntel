@@ -1,0 +1,23 @@
+[
+  {
+    "code": "NG",
+    "name": "Nigeria",
+    "languages": ["en", "yo", "ha", "ig", "pcm"],
+    "seasons": [
+      { "name": "Early rainy season", "months": [3, 4, 5, 6, 7] },
+      { "name": "Late rainy season", "months": [8, 9, 10] },
+      { "name": "Dry season", "months": [11, 12, 1, 2] },
+      { "name": "Harmattan", "months": [12, 1, 2] }
+    ],
+    "regions": [
+      { "name": "Kano", "zone": "Sudan Savanna", "lat": 12.0, "lon": 8.52 },
+      { "name": "Kaduna", "zone": "Northern Guinea Savanna", "lat": 10.52, "lon": 7.44 },
+      { "name": "Plateau", "zone": "Jos Plateau", "lat": 9.9, "lon": 8.9 },
+      { "name": "Benue", "zone": "Southern Guinea Savanna", "lat": 7.73, "lon": 8.54 },
+      { "name": "Oyo", "zone": "Derived Savanna", "lat": 7.38, "lon": 3.94 },
+      { "name": "Ogun", "zone": "Rainforest", "lat": 7.16, "lon": 3.35 },
+      { "name": "Enugu", "zone": "Derived Savanna", "lat": 6.45, "lon": 7.5 },
+      { "name": "Cross River", "zone": "Rainforest", "lat": 5.87, "lon": 8.6 }
+    ]
+  }
+]

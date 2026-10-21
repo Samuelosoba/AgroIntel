@@ -1,0 +1,119 @@
+[
+  {
+    "key": "maize", "name": "Maize", "category": "cereal",
+    "localNames": { "yo": "Àgbàdo", "ha": "Masara", "ig": "Ọka", "pcm": "Corn" },
+    "growingDays": [90, 120], "waterNeed": "medium",
+    "tempC": [18, 32], "rainfallMm": [500, 1200], "ph": [5.5, 7.5],
+    "soilTypes": ["loam", "sandy loam", "clay loam"],
+    "pestRisks": ["Fall armyworm", "Stem borer"],
+    "calendar": { "NG": { "plant": [3, 4, 5, 6], "harvest": [7, 8, 9, 10], "notes": "South plants from March; north from May–June once rains are steady." } }
+  },
+  {
+    "key": "cassava", "name": "Cassava", "category": "tuber",
+    "localNames": { "yo": "Ẹ̀gẹ́", "ha": "Rogo", "ig": "Akpụ", "pcm": "Cassava" },
+    "growingDays": [270, 540], "waterNeed": "low",
+    "tempC": [20, 35], "rainfallMm": [600, 1500], "ph": [4.5, 7.0],
+    "soilTypes": ["sandy loam", "loam"],
+    "pestRisks": ["Cassava mealybug", "Cassava green mite", "Whitefly"],
+    "calendar": { "NG": { "plant": [4, 5, 6, 9, 10], "harvest": [1, 2, 3, 10, 11, 12], "notes": "Harvest 9–18 months after planting depending on variety." } }
+  },
+  {
+    "key": "yam", "name": "Yam", "category": "tuber",
+    "localNames": { "yo": "Iṣu", "ha": "Doya", "ig": "Ji", "pcm": "Yam" },
+    "growingDays": [210, 300], "waterNeed": "medium",
+    "tempC": [25, 32], "rainfallMm": [1000, 1500], "ph": [5.5, 6.5],
+    "soilTypes": ["loam", "sandy loam"],
+    "pestRisks": ["Yam beetle", "Nematodes"],
+    "calendar": { "NG": { "plant": [2, 3, 4], "harvest": [8, 9, 10, 11, 12], "notes": "Plant setts on mounds or ridges in deep, well-drained soil." } }
+  },
+  {
+    "key": "rice", "name": "Rice", "category": "cereal",
+    "localNames": { "yo": "Ìrẹsì", "ha": "Shinkafa", "ig": "Osikapa", "pcm": "Rice" },
+    "growingDays": [110, 150], "waterNeed": "high",
+    "tempC": [20, 35], "rainfallMm": [1000, 2000], "ph": [5.0, 7.0],
+    "soilTypes": ["clay", "clay loam", "silt loam"],
+    "pestRisks": ["Stem borer", "African rice gall midge", "Grain-eating birds"],
+    "calendar": { "NG": { "plant": [5, 6, 7], "harvest": [9, 10, 11], "notes": "Lowland rice suits valley bottoms (fadama) that hold water." } }
+  },
+  {
+    "key": "beans", "name": "Beans (Cowpea)", "category": "legume",
+    "localNames": { "yo": "Ẹ̀wà", "ha": "Wake", "ig": "Agwa", "pcm": "Beans" },
+    "growingDays": [60, 90], "waterNeed": "low",
+    "tempC": [20, 35], "rainfallMm": [400, 900], "ph": [5.5, 7.0],
+    "soilTypes": ["sandy loam", "loam"],
+    "pestRisks": ["Maruca pod borer", "Aphids", "Flower thrips"],
+    "calendar": { "NG": { "plant": [6, 7, 8], "harvest": [9, 10, 11], "notes": "Late planting helps pods dry at the end of the rains." } }
+  },
+  {
+    "key": "tomato", "name": "Tomato", "category": "vegetable",
+    "localNames": { "yo": "Tòmátì", "ha": "Tumatir", "ig": "Tomato", "pcm": "Tomato" },
+    "growingDays": [70, 110], "waterNeed": "medium",
+    "tempC": [18, 30], "rainfallMm": [400, 1200], "ph": [6.0, 7.0],
+    "soilTypes": ["loam", "sandy loam"],
+    "pestRisks": ["Tuta absoluta (tomato leaf miner)", "Whitefly", "Fruit worm"],
+    "calendar": { "NG": { "plant": [9, 10, 11], "harvest": [12, 1, 2, 3], "notes": "Dry-season irrigated crop in the north; avoid peak rains (disease pressure)." } }
+  },
+  {
+    "key": "pepper", "name": "Pepper", "category": "vegetable",
+    "localNames": { "yo": "Ata", "ha": "Barkono", "ig": "Ose", "pcm": "Pepper" },
+    "growingDays": [90, 150], "waterNeed": "medium",
+    "tempC": [20, 32], "rainfallMm": [600, 1250], "ph": [5.5, 7.0],
+    "soilTypes": ["loam", "sandy loam"],
+    "pestRisks": ["Aphids", "Thrips", "Mites"],
+    "calendar": { "NG": { "plant": [3, 4, 5], "harvest": [7, 8, 9, 10], "notes": "Raise in a nursery for 4–6 weeks before transplanting." } }
+  },
+  {
+    "key": "cocoa", "name": "Cocoa", "category": "tree",
+    "localNames": { "yo": "Kòkó", "ha": "Koko", "ig": "Koko", "pcm": "Cocoa" },
+    "growingDays": [1095, 1825], "waterNeed": "high",
+    "tempC": [21, 32], "rainfallMm": [1500, 2500], "ph": [5.0, 7.5],
+    "soilTypes": ["loam", "clay loam"],
+    "pestRisks": ["Mirids (capsids)", "Cocoa pod borer"],
+    "calendar": { "NG": { "plant": [4, 5, 6], "harvest": [10, 11, 12, 1, 2], "notes": "First pods 3–5 years after planting; needs shade when young." } }
+  },
+  {
+    "key": "groundnut", "name": "Groundnut", "category": "legume",
+    "localNames": { "yo": "Ẹ̀pà", "ha": "Gyaɗa", "ig": "Ahụekere", "pcm": "Groundnut" },
+    "growingDays": [90, 130], "waterNeed": "low",
+    "tempC": [22, 33], "rainfallMm": [500, 1000], "ph": [5.5, 7.0],
+    "soilTypes": ["sandy loam", "sandy"],
+    "pestRisks": ["Aphids (rosette virus vector)", "Termites"],
+    "calendar": { "NG": { "plant": [5, 6, 7], "harvest": [9, 10], "notes": "Light, loose soil makes pegging and lifting easier." } }
+  },
+  {
+    "key": "soybean", "name": "Soybean", "category": "legume",
+    "localNames": { "yo": "Ẹ̀wà Sóyà", "ha": "Waken suya", "ig": "Soya", "pcm": "Soya beans" },
+    "growingDays": [90, 120], "waterNeed": "medium",
+    "tempC": [20, 32], "rainfallMm": [600, 1200], "ph": [6.0, 7.0],
+    "soilTypes": ["loam", "clay loam"],
+    "pestRisks": ["Pod-sucking bugs", "Leaf beetles"],
+    "calendar": { "NG": { "plant": [6, 7], "harvest": [10, 11], "notes": "Strong in the Guinea Savanna (Benue, Kaduna, Niger)." } }
+  },
+  {
+    "key": "plantain", "name": "Plantain", "category": "fruit",
+    "localNames": { "yo": "Ọ̀gẹ̀dẹ̀ àgbagbà", "ha": "Ayaba", "ig": "Ogede", "pcm": "Plantain" },
+    "growingDays": [300, 450], "waterNeed": "high",
+    "tempC": [25, 35], "rainfallMm": [1500, 2500], "ph": [5.5, 7.0],
+    "soilTypes": ["loam", "clay loam"],
+    "pestRisks": ["Banana weevil", "Nematodes"],
+    "calendar": { "NG": { "plant": [3, 4, 5], "harvest": [], "notes": "Bunches are ready 10–15 months after planting; harvest continues year-round." } }
+  },
+  {
+    "key": "banana", "name": "Banana", "category": "fruit",
+    "localNames": { "yo": "Ọ̀gẹ̀dẹ̀ wẹ́wẹ́", "ha": "Ayaba", "ig": "Unere", "pcm": "Banana" },
+    "growingDays": [270, 400], "waterNeed": "high",
+    "tempC": [25, 35], "rainfallMm": [1500, 2500], "ph": [5.5, 7.0],
+    "soilTypes": ["loam", "clay loam"],
+    "pestRisks": ["Banana weevil", "Nematodes"],
+    "calendar": { "NG": { "plant": [3, 4, 5], "harvest": [], "notes": "Harvest continues year-round once established." } }
+  },
+  {
+    "key": "oil_palm", "name": "Oil Palm", "category": "tree",
+    "localNames": { "yo": "Ọ̀pẹ", "ha": "Kwakwa", "ig": "Nkwụ", "pcm": "Palm tree" },
+    "growingDays": [1095, 1460], "waterNeed": "high",
+    "tempC": [24, 32], "rainfallMm": [1800, 3000], "ph": [4.0, 6.5],
+    "soilTypes": ["loam", "clay loam"],
+    "pestRisks": ["Rhinoceros beetle", "Leaf miner"],
+    "calendar": { "NG": { "plant": [4, 5, 6], "harvest": [2, 3, 4, 5], "notes": "First bunches about 3–4 years after planting; peak harvest February–May." } }
+  }
+]
