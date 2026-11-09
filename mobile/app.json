@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "AgroIntel",
+    "slug": "agrointel",
+    "scheme": "agrointel",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#f6f7f2",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.agrointel.app"
+    },
+    "android": {
+      "package": "com.agrointel.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#008751",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "AgroIntel uses the camera to photograph plants so it can check them for diseases.",
+          "photosPermission": "AgroIntel needs your photos so you can choose a plant picture to check for diseases."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "AgroIntel uses your location for local weather, planting advice and to place your farm."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      "expo-font",
+      "expo-status-bar"
+    ]
+  }
+}

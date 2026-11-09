@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import bcrypt from "bcryptjs";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -92,7 +93,48 @@ async function main() {
     await prisma.disease.upsert({ where: { key }, update: data, create: { key, ...data } });
   }
 
+  if (process.env.NODE_ENV !== "production") await seedDemoAccount();
+
   console.log("Seed complete");
+}
+
+// Local demo login with a farm and crops, so every screen has data to show.
+// Never seeded in production: the password is public.
+const DEMO ={ email: "demo@agrointel.app", password: "AgroDemo2026!" };
+const DAY = 86_400_000;
+
+async function seedDemoAccount() {
+  const passwordHash = await bcrypt.hash(DEMO.password, 10);
+  const user = await prisma.user.upsert({
+    where: { email: DEMO.email },
+    update: { passwordHash },
+    create: { email: DEMO.email, passwordHash, name: "Amina Bello", countryCode: "NG", language: "en" },
+  });
+
+  // Recreate the demo farm each time so re-seeding resets it to a known state.
+  await prisma.farm.deleteMany({ where: { ownerId: user.id } });
+  const now = Date.now();
+  await prisma.farm.create({
+    data: {
+      ownerId: user.id,
+      name: "Amina's Farm",
+      locationName: "Zaria, Kaduna",
+      lat: 11.0855,
+      lon: 7.7199,
+      sizeHa: 2.5,
+      soilType: "sandy loam",
+      soil: { ph: 6.2, nitrogen: 18, phosphorus: 12, potassium: 140, organicMatter: 1.4 },
+      crops: {
+        create: [
+          { cropKey: "maize", plantedAt: new Date(now - 100 * DAY), expectedHarvestAt: new Date(now + 5 * DAY) },
+          { cropKey: "tomato", plantedAt: new Date(now - 20 * DAY), expectedHarvestAt: new Date(now + 70 * DAY) },
+          { cropKey: "soybean", plantedAt: new Date(now - 90 * DAY), expectedHarvestAt: new Date(now + 15 * DAY) },
+        ],
+      },
+    },
+  });
+
+  console.log(`Demo account: ${DEMO.email} / ${DEMO.password}`);
 }
 
 main()

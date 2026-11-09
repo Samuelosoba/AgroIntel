@@ -6,7 +6,8 @@ AI-powered smart farming platform: a farmer's digital agricultural co-pilot.
 ## Repository layout
 
 ```
-app/      React PWA (Vite, TypeScript, Tailwind) — mobile-first farmer app
+app/      React PWA (Vite, TypeScript, Tailwind) — mobile-first web app
+mobile/   React Native app (Expo SDK 57, Expo Router) — native Android/iOS app
 server/   Node.js/Express API (TypeScript, Prisma, PostgreSQL)
 ai/       Python/FastAPI inference service — image quality, disease model, severity
 ml/       Training pipeline — dataset prep, training, evaluation, ONNX export, feedback loop
@@ -18,6 +19,9 @@ Each folder owns one concern. Inside `app/` and `server/`, code is grouped by fe
 (`features/scan`, `modules/scans`, …) so a feature's files live together.
 
 ## Quick start
+
+Full setup — what to install, keys, every `.env` setting, troubleshooting — is in
+[docs/config.md](docs/config.md).
 
 Prerequisites: Node 20+, Python 3.11+, Docker (for Postgres).
 
@@ -37,9 +41,17 @@ cd ai && python -m venv .venv && .venv/Scripts/activate   # macOS/Linux: source 
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 
-# 4. App
+# 4. Web app
 npm run dev:app                            # http://localhost:5173
+
+# 5. Mobile app (separate install — Expo pins its own React version)
+cd mobile
+cp .env.example .env                       # set EXPO_PUBLIC_API_URL to your computer's LAN IP
+npm install
+npx expo start -c                          # scan the QR code with Expo Go, or press a / i
 ```
+
+The web and mobile apps call the same API and share types from `shared/`.
 
 The disease scanner needs a trained model in `ai/artifacts/disease/<version>/`.
 Until one is exported, quality checks still run and scans return

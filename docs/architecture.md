@@ -1,7 +1,8 @@
 # Architecture
 
 ```
- app (React PWA) ──HTTPS──▶ server (Express API) ──internal HTTP──▶ ai (FastAPI)
+ app (web PWA) ──┐
+ mobile (Expo) ──┴─HTTPS──▶ server (Express API) ──internal HTTP──▶ ai (FastAPI)
                                │        │                              │
                           PostgreSQL  Claude API              ai/artifacts/<task>/<version>
                           (Prisma)    (assistant)                  ▲
