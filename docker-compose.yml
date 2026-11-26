@@ -22,6 +22,7 @@ services:
     env_file: ./server/.env
     environment:
       DATABASE_URL: postgresql://agrointel:agrointel@db:5432/agrointel
+      DATABASE_URL_UNPOOLED: postgresql://agrointel:agrointel@db:5432/agrointel
       AI_SERVICE_URL: http://ai:8000
     depends_on: [db, ai]
     ports: ["4000:4000"]

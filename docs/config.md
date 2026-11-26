@@ -16,7 +16,7 @@ The `python` command that Windows ships with only opens the Microsoft Store. Ins
 
 ### Database: pick one
 
-- **Hosted (easiest, nothing to install):** create a free project on **neon.tech** or **supabase.com** and copy the connection string (`postgresql://…`).
+- **Hosted (easiest, nothing to install):** create a free project on **neon.tech** or **supabase.com** and copy the connection string (`postgresql://…`). On Neon, copy both strings from the Connect dialog: pooling on for `DATABASE_URL` (host contains `-pooler`), pooling off for `DATABASE_URL_UNPOOLED`. Migrations need the direct one.
 - **Local install:** PostgreSQL from postgresql.org/download/windows. Remember the password you set.
 - **Docker:** install Docker Desktop, then run `docker compose up -d db` from the project root. That database is already set up for this project:
   `postgresql://agrointel:agrointel@localhost:5432/agrointel`
@@ -45,6 +45,7 @@ Copy `server/.env.example`, then set:
 
 ```
 DATABASE_URL=<your Postgres connection string>
+DATABASE_URL_UNPOOLED=<direct connection string; same as above for local Postgres>
 JWT_SECRET=<long random text, 32+ characters>
 ANTHROPIC_API_KEY=<your key>
 PUBLIC_BASE_URL=http://<PC-IP>:4000
@@ -54,7 +55,8 @@ CORS_ORIGIN=http://localhost:5173
 | Variable | Default | Notes |
 |---|---|---|
 | `PORT` | `4000` | API port |
-| `DATABASE_URL` | none (required) | Postgres connection string |
+| `DATABASE_URL` | none (required) | Postgres connection string (pooled on Neon) |
+| `DATABASE_URL_UNPOOLED` | none (required for migrations) | Direct connection string, used by `prisma migrate` |
 | `JWT_SECRET` | none (required) | Signs login tokens; at least 8 characters, use 32+ |
 | `CORS_ORIGIN` | `http://localhost:5173` | Web app address(es), comma-separated |
 | `AI_SERVICE_URL` | `http://localhost:8000` | Python AI service |

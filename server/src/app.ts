@@ -39,3 +39,6 @@ export function createApp() {
   app.use(errorHandler);
   return app;
 }
+
+// Vercel detects this file as an Express app and serves its default export.
+export default createApp();

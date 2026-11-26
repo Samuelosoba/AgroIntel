@@ -1,6 +1,7 @@
-import { createApp } from "./app.js";
+// Local/Docker entry point. On Vercel, src/app.ts's default export is served directly.
+import app from "./app.js";
 import { env } from "./config/env.js";
 
-createApp().listen(env.PORT, () => {
+app.listen(env.PORT, () => {
   console.log(`AgroIntel API listening on http://localhost:${env.PORT}`);
 });
