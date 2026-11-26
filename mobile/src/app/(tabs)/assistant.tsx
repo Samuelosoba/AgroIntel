@@ -4,10 +4,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 import type { ChatMessage, ChatResponse } from "@agrointel/shared";
-import Animated, { FadeInDown, SlideInRight, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Logo } from "@/components/illustrations";
 import { ErrorNote, Icon, IconBubble, Reveal, Tap, s, type IconName } from "@/components/ui";
 import { api } from "@/lib/api";
+import { riseIn } from "@/motion";
 import { colors, radius, shadow, space } from "@/theme";
 
 const STARTERS: { q: string; icon: IconName }[] = [
@@ -20,7 +21,7 @@ const STARTERS: { q: string; icon: IconName }[] = [
 /** Three dots hopping in turn while the assistant writes. */
 function TypingDots() {
   return (
-    <Animated.View entering={FadeInDown} style={[st.bubble, st.bot, s.row, { gap: 5, paddingVertical: 14 }]}>
+    <Animated.View entering={riseIn()} style={[st.bubble, st.bot, s.row, { gap: 5, paddingVertical: 14 }]}>
       {[0, 1, 2].map((i) => <Dot key={i} delay={i * 160} />)}
     </Animated.View>
   );
@@ -101,7 +102,7 @@ export default function AssistantScreen() {
           }
           renderItem={({ item }) => (
             <Animated.View
-              entering={(item.role === "user" ? SlideInRight : FadeInDown).springify().damping(18)}
+              entering={riseIn()}
               style={[st.bubble, item.role === "user" ? st.user : st.bot]}
             >
               <Text style={{ fontSize: 15, lineHeight: 22, color: item.role === "user" ? colors.white : colors.earth900 }}>{item.content}</Text>
@@ -124,7 +125,7 @@ export default function AssistantScreen() {
             multiline
             style={st.input}
           />
-          <Tap onPress={() => send(input)} disabled={chat.isPending} accessibilityLabel="Send" scaleTo={0.88} style={[st.send, chat.isPending && { opacity: 0.5 }]}>
+          <Tap onPress={() => send(input)} disabled={chat.isPending} accessibilityLabel="Send" style={[st.send, chat.isPending && { opacity: 0.5 }]}>
             <Icon name="send" size={18} color={colors.white} />
           </Tap>
         </View>

@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import Animated, {
-  Extrapolation, FadeIn, FadeInDown, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, type SharedValue,
+  Extrapolation, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, type SharedValue,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, RoundButton } from "@/components/ui";
 import { HarvestScene, ScanScene, WeatherScene } from "@/components/illustrations";
+import { fadeIn } from "@/motion";
 import { useOnboarding } from "@/lib/onboarding";
 import { colors, radius, space } from "@/theme";
 
@@ -49,7 +50,7 @@ export default function OnboardingScreen() {
   return (
     <SafeAreaView style={st.root} edges={["top", "bottom"]}>
       <View style={st.topBar}>
-        <Animated.Text entering={FadeIn.delay(200)} style={st.brand}>AgroIntel</Animated.Text>
+        <Animated.Text entering={fadeIn()} style={st.brand}>AgroIntel</Animated.Text>
         {!last && (
           <Pressable onPress={finish} hitSlop={12}>
             <Text style={st.skip}>Skip</Text>
@@ -78,7 +79,7 @@ export default function OnboardingScreen() {
 
       <View style={st.controls}>
         {last ? (
-          <Animated.View entering={FadeInDown.springify().damping(16)} style={{ flex: 1 }}>
+          <Animated.View entering={fadeIn()} style={{ flex: 1 }}>
             <Button title="Get started" variant="dark" iconRight="arrow-right" onPress={finish} />
           </Animated.View>
         ) : (
@@ -99,17 +100,17 @@ function Slide({
 }: { index: number; width: number; scrollX: SharedValue<number> } & Omit<(typeof SLIDES)[number], "key">) {
   const range = [(index - 1) * width, index * width, (index + 1) * width];
 
-  // Illustration lags behind the swipe (parallax) and shrinks as it leaves.
+  // Illustration lags slightly behind the swipe and fades as it leaves.
   const art = useAnimatedStyle(() => ({
     transform: [
-      { translateX: interpolate(scrollX.value, range, [width * 0.35, 0, -width * 0.35], Extrapolation.CLAMP) },
-      { scale: interpolate(scrollX.value, range, [0.8, 1, 0.8], Extrapolation.CLAMP) },
+      { translateX: interpolate(scrollX.value, range, [width * 0.15, 0, -width * 0.15], Extrapolation.CLAMP) },
+      { scale: interpolate(scrollX.value, range, [0.95, 1, 0.95], Extrapolation.CLAMP) },
     ],
     opacity: interpolate(scrollX.value, range, [0, 1, 0], Extrapolation.CLAMP),
   }));
   const text = useAnimatedStyle(() => ({
     opacity: interpolate(scrollX.value, range, [0, 1, 0], Extrapolation.CLAMP),
-    transform: [{ translateY: interpolate(scrollX.value, range, [24, 0, 24], Extrapolation.CLAMP) }],
+    transform: [{ translateY: interpolate(scrollX.value, range, [8, 0, 8], Extrapolation.CLAMP) }],
   }));
 
   const artSize = Math.min(width - 48, 340);

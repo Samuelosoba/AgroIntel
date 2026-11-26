@@ -8,6 +8,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AnimatedSplash } from "@/components/AnimatedSplash";
 import { AuthProvider, useAuth } from "@/lib/auth";
 import { OnboardingProvider, useOnboarding } from "@/lib/onboarding";
+import { duration } from "@/motion";
 import { colors } from "@/theme";
 
 // Keep the native splash up until our animated one is on screen.
@@ -50,17 +51,18 @@ function Root() {
           screenOptions={{
             headerShown: false,
             contentStyle: { backgroundColor: colors.earth50 },
-            animation: "slide_from_right",
+            animation: "fade",
+            animationDuration: duration.base,
           }}
         >
           <Stack.Protected guard={!onboarded && !user}>
-            <Stack.Screen name="onboarding" options={{ animation: "fade" }} />
+            <Stack.Screen name="onboarding" />
           </Stack.Protected>
           <Stack.Protected guard={!!onboarded && !user}>
-            <Stack.Screen name="login" options={{ animation: "fade" }} />
+            <Stack.Screen name="login" />
           </Stack.Protected>
           <Stack.Protected guard={!!user}>
-            <Stack.Screen name="(tabs)" options={{ animation: "fade" }} />
+            <Stack.Screen name="(tabs)" />
             <Stack.Screen name="scan/[id]" />
             <Stack.Screen name="weather" />
             <Stack.Screen name="alerts" />

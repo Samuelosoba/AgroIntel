@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import Svg, { Path } from "react-native-svg";
 import type { DailyForecast, WeatherReport } from "@agrointel/shared";
 import { conditionIcon } from "@/components/icons";
 import { WeatherArt } from "@/components/illustrations";
+import { duration, timing } from "@/motion";
 import { BackHeader, Card, ErrorNote, Icon, IconBubble, Reveal, Screen, SectionTitle, Spinner, s, type IconName } from "@/components/ui";
 import { AdvisoryList } from "@/features/weather/AdvisoryList";
 import { dayName, time } from "@/lib/format";
@@ -98,7 +99,7 @@ function Daylight({ day }: { day?: DailyForecast }) {
   const target = Math.min(1, Math.max(0, (Date.now() - rise) / (set - rise)));
 
   useEffect(() => {
-    progress.value = withDelay(400, withTiming(target, { duration: 1600, easing: Easing.out(Easing.cubic) }));
+    progress.value = withDelay(duration.base, withTiming(target, timing(duration.slow)));
   }, [progress, target]);
 
   const sun = useAnimatedStyle(() => {

@@ -3,15 +3,16 @@ import {
   ActivityIndicator, Pressable, RefreshControl, ScrollView, StyleSheet, Text, TextInput, View,
   type PressableProps, type StyleProp, type TextInputProps, type ViewStyle,
 } from "react-native";
-import Animated, { Easing, FadeInDown, useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { AdvisoryLevel } from "@agrointel/shared";
+import { duration, riseIn, stagger, timing } from "@/motion";
 import { colors, font, levelColors, radius, shadow, space } from "@/theme";
 import { Icon, type IconName } from "./icons";
 
 export { Icon, type IconName } from "./icons";
 
-/** Pressable that springs down slightly when touched. */
+/** Pressable that eases down slightly when touched. */
 export function Tap({
   children, style, scaleTo = 0.96, ...props
 }: Omit<PressableProps, "style" | "children"> & { children?: ReactNode; style?: StyleProp<ViewStyle>; scaleTo?: number }) {
@@ -21,11 +22,11 @@ export function Tap({
     <Pressable
       {...props}
       onPressIn={(e) => {
-        scale.value = withSpring(scaleTo, { damping: 15, stiffness: 300 });
+        scale.value = withTiming(scaleTo, timing(duration.fast));
         props.onPressIn?.(e);
       }}
       onPressOut={(e) => {
-        scale.value = withSpring(1, { damping: 12, stiffness: 250 });
+        scale.value = withTiming(1, timing(duration.fast));
         props.onPressOut?.(e);
       }}
     >
@@ -34,10 +35,10 @@ export function Tap({
   );
 }
 
-/** Children slide up and fade in, staggered by `index`. */
+/** Children fade in and rise slightly, staggered by `index`. */
 export function Reveal({ children, index = 0, style }: { children: ReactNode; index?: number; style?: StyleProp<ViewStyle> }) {
   return (
-    <Animated.View entering={FadeInDown.delay(80 * index).duration(450).springify().damping(18)} style={style}>
+    <Animated.View entering={riseIn(stagger(index))} style={style}>
       {children}
     </Animated.View>
   );
@@ -114,7 +115,7 @@ const buttonVariants: Record<Variant, { bg: string; fg: string; border?: boolean
 /** Round icon button, e.g. the onboarding "next" arrow. */
 export function RoundButton({ icon, onPress, size = 56, color = colors.brand500, label }: { icon: IconName; onPress: () => void; size?: number; color?: string; label: string }) {
   return (
-    <Tap onPress={onPress} accessibilityLabel={label} scaleTo={0.9} style={[{ width: size, height: size, borderRadius: size / 2, backgroundColor: color, alignItems: "center", justifyContent: "center" }, shadow.lifted]}>
+    <Tap onPress={onPress} accessibilityLabel={label} style={[{ width: size, height: size, borderRadius: size / 2, backgroundColor: color, alignItems: "center", justifyContent: "center" }, shadow.lifted]}>
       <Icon name={icon} size={size * 0.42} color={colors.white} />
     </Tap>
   );
@@ -199,7 +200,7 @@ export function ProgressBar({ value, color }: { value: number; color?: string })
   const fill = color ?? (value >= 0.8 ? colors.brand500 : value >= 0.45 ? colors.sun500 : colors.earth400);
   const width = useSharedValue(0);
   useEffect(() => {
-    width.value = withTiming(value, { duration: 900, easing: Easing.out(Easing.cubic) });
+    width.value = withTiming(value, timing(duration.slow));
   }, [value, width]);
   const animated = useAnimatedStyle(() => ({ width: `${Math.round(width.value * 100)}%` }));
   return (

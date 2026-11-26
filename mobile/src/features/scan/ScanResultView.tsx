@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { router } from "expo-router";
-import Animated, { ZoomIn } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { DiseaseInfo, ScanFeedbackInput, ScanResult, ScanStatus, Severity } from "@agrointel/shared";
+import { fadeIn } from "@/motion";
 import { Badge, Button, Card, ErrorNote, Icon, ProgressBar, Reveal, SectionTitle, s, type IconName } from "@/components/ui";
 import { api } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
@@ -48,7 +49,7 @@ export function ScanResultView({ scan }: { scan: ScanResult }) {
           </Text>
         </Card>
       )}
-      <Animated.View entering={ZoomIn.springify().damping(16)}>
+      <Animated.View entering={fadeIn()}>
         <Image source={{ uri: scan.imageUrl }} style={{ width: "100%", aspectRatio: 4 / 3, borderRadius: radius.xl, backgroundColor: colors.earth100 }} />
         <View style={{ position: "absolute", top: space.md, left: space.md, backgroundColor: "rgba(255,255,255,0.92)", borderRadius: radius.full, paddingHorizontal: 12, paddingVertical: 5 }}>
           <Text style={[s.small, { fontWeight: "800", color: colors.earth800 }]}>{STATUS_LABEL[scan.status]}</Text>

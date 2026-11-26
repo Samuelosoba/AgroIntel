@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Logo } from "@/components/illustrations";
+import { riseIn, stagger } from "@/motion";
 import { Button, ErrorNote, Field, s } from "@/components/ui";
 import { useAuth } from "@/lib/auth";
 import { colors, space } from "@/theme";
@@ -34,7 +35,7 @@ export default function LoginScreen() {
     <SafeAreaView edges={["top", "bottom"]} style={st.root}>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={st.content} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-          <Animated.View entering={FadeInUp.duration(500)} style={{ alignItems: "center" }}>
+          <Animated.View entering={riseIn(stagger(0))} style={{ alignItems: "center" }}>
             <Logo size={72} />
             <Text style={st.title}>{mode === "login" ? "Welcome back" : "Create your account"}</Text>
             <Text style={[s.muted, { textAlign: "center" }]}>
@@ -42,7 +43,7 @@ export default function LoginScreen() {
             </Text>
           </Animated.View>
 
-          <Animated.View entering={FadeInDown.delay(150).duration(500)} style={{ gap: space.md, marginTop: space.xl }}>
+          <Animated.View entering={riseIn(stagger(1))} style={{ gap: space.md, marginTop: space.xl }}>
             {mode === "register" && <Field label="Full name" value={form.name} onChangeText={set("name")} autoComplete="name" placeholder="Amina Bello" />}
             <Field label="Email" value={form.email} onChangeText={set("email")} autoComplete="email" keyboardType="email-address" autoCapitalize="none" placeholder="you@example.com" />
             <Field
@@ -63,7 +64,7 @@ export default function LoginScreen() {
             </Pressable>
           </Animated.View>
 
-          <Animated.View entering={FadeInDown.delay(300).duration(500)} style={st.demo}>
+          <Animated.View entering={riseIn(stagger(2))} style={st.demo}>
             <View style={st.divider}>
               <View style={st.line} />
               <Text style={s.small}>or</Text>

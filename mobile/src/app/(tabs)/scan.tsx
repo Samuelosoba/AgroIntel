@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
-import Animated, { FadeIn, FadeInDown, FadeOut, ZoomIn } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ScanResult } from "@agrointel/shared";
 import { ScanScene, ScanSweep } from "@/components/illustrations";
+import { fadeIn, fadeOut, riseIn } from "@/motion";
 import { Button, Card, Chip, ErrorNote, Icon, Reveal, Screen, SectionTitle, Tap, s } from "@/components/ui";
 import { PhotoTips } from "@/features/scan/PhotoTips";
 import { STATUS_LABEL } from "@/features/scan/ScanResultView";
@@ -111,7 +112,7 @@ export default function ScanScreen() {
       )}
 
       {photo && (
-        <Animated.View entering={FadeInDown} style={{ marginTop: space.xl }}>
+        <Animated.View entering={riseIn()} style={{ marginTop: space.xl }}>
           <ErrorNote error={analyze.error} />
           <Button
             title={analyze.isPending ? "Analysing…" : "Analyse plant"}
@@ -164,7 +165,7 @@ function PhotoPreview({ uri, analysing, onClear }: { uri: string; analysing: boo
   }, [analysing]);
 
   return (
-    <Animated.View entering={ZoomIn.springify().damping(16)} style={st.preview} onLayout={(e) => setSize(e.nativeEvent.layout.width)}>
+    <Animated.View entering={fadeIn()} style={st.preview} onLayout={(e) => setSize(e.nativeEvent.layout.width)}>
       <Image source={{ uri }} style={StyleSheet.absoluteFill} />
       <View style={st.frame} pointerEvents="none">
         <View style={[st.corner, { top: 0, left: 0, borderTopWidth: 4, borderLeftWidth: 4 }]} />
@@ -174,7 +175,7 @@ function PhotoPreview({ uri, analysing, onClear }: { uri: string; analysing: boo
       </View>
 
       {analysing ? (
-        <Animated.View entering={FadeIn} exiting={FadeOut} style={st.overlay}>
+        <Animated.View entering={fadeIn()} exiting={fadeOut()} style={st.overlay}>
           {size > 0 && <ScanSweep height={size - 64} color={colors.brand300} style={{ left: 32, right: 32, top: 32 }} />}
           <View style={st.stepBox}>
             {STEPS.map((label, i) => (

@@ -1,8 +1,9 @@
 import { Pressable, Text, View } from "react-native";
-import Animated, { FadeInDown, FadeOutLeft, LinearTransition } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Alert } from "@agrointel/shared";
 import { Card, EmptyState, Icon, IconBubble, s, type IconName } from "@/components/ui";
+import { fadeOut, reflow, riseIn, stagger } from "@/motion";
 import { api } from "@/lib/api";
 import { colors, levelColors, space } from "@/theme";
 
@@ -35,7 +36,7 @@ export function AlertsList({ alerts }: { alerts: Alert[] }) {
       {unread.map((a, i) => {
         const c = levelColors[a.level];
         return (
-          <Animated.View key={a.id} entering={FadeInDown.delay(i * 70)} exiting={FadeOutLeft.duration(250)} layout={LinearTransition.springify().damping(18)}>
+          <Animated.View key={a.id} entering={riseIn(stagger(i))} exiting={fadeOut()} layout={reflow()}>
             <Card style={{ flexDirection: "row", gap: space.md }}>
               <IconBubble name={TYPE[a.type].icon} bg={c.bg} fg={c.icon} />
               <View style={{ flex: 1 }}>
