@@ -26,3 +26,6 @@ ml/runs/*
 !ml/runs/.gitkeep
 ai/artifacts/*
 !ai/artifacts/.gitkeep
+
+# vercel
+.vercel
