@@ -1,7 +1,8 @@
 import * as SecureStore from "expo-secure-store";
 import { demoRequest, resetDemo } from "./demo";
 
-const BASE = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:4000/api/v1";
+// The live API by default; point EXPO_PUBLIC_API_URL at your computer to use a local server.
+const BASE = process.env.EXPO_PUBLIC_API_URL ?? "https://agrointel-api.vercel.app/api/v1";
 const TOKEN_KEY = "agrointel.token";
 
 export class ApiError extends Error {

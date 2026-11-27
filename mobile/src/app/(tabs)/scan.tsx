@@ -12,6 +12,7 @@ import { PhotoTips } from "@/features/scan/PhotoTips";
 import { STATUS_LABEL } from "@/features/scan/ScanResultView";
 import { api, photoPart } from "@/lib/api";
 import { date, pct } from "@/lib/format";
+import { shrinkPhoto } from "@/lib/photo";
 import { useCrops, useFarms, useScans } from "@/lib/queries";
 import { colors, radius, shadow, space } from "@/theme";
 
@@ -47,7 +48,8 @@ export default function ScanScreen() {
       : await ImagePicker.launchImageLibraryAsync(PICKER_OPTIONS);
     if (!result.canceled && result.assets[0]) {
       const a = result.assets[0];
-      setPhoto({ uri: a.uri, mimeType: a.mimeType });
+      // If shrinking fails, upload the original rather than block the scan.
+      setPhoto(await shrinkPhoto(a.uri).catch(() => ({ uri: a.uri, mimeType: a.mimeType })));
     }
   };
 
