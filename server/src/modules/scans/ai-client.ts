@@ -28,6 +28,7 @@ export async function analyzeDisease(image: Buffer, mimeType: string, cropHint?:
     res = await fetch(`${env.AI_SERVICE_URL}/v1/disease/analyze`, {
       method: "POST",
       body: form,
+      headers: env.AI_SERVICE_TOKEN ? { Authorization: `Bearer ${env.AI_SERVICE_TOKEN}` } : undefined,
       signal: AbortSignal.timeout(env.AI_SERVICE_TIMEOUT_MS),
     });
   } catch {

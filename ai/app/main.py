@@ -1,6 +1,7 @@
+import hmac
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, UploadFile
 
 from app.config import settings
 from app.core.image import ImageDecodeError, decode_image
@@ -35,7 +36,14 @@ def health():
     }
 
 
-@app.post("/v1/disease/analyze", response_model=AnalysisResponse)
+def require_token(authorization: str | None = Header(None)) -> None:
+    """When AI_SERVICE_TOKEN is set, only callers holding it (the AgroIntel API) may analyse photos."""
+    expected = settings.ai_service_token
+    if expected and not hmac.compare_digest((authorization or "").encode(), f"Bearer {expected}".encode()):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+
+@app.post("/v1/disease/analyze", response_model=AnalysisResponse, dependencies=[Depends(require_token)])
 async def analyze_disease(image: UploadFile = File(...), crop: str | None = Form(None)):
     try:
         img = decode_image(await image.read())

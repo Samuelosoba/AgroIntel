@@ -60,8 +60,14 @@ python -m agroml.export --run runs/<version> --min-macro-f1 0.85
 
 Refuses to export without test metrics or below the quality bar. Verifies ONNX output
 matches PyTorch, then writes `ai/artifacts/disease/<version>/` with `model.onnx`,
-`labels.json` and `model_card.json`. Restart the AI service (or pin
-`DISEASE_MODEL_VERSION`). Every scan records the version that produced it.
+`labels.json` and `model_card.json`. Every scan records the version that produced it.
+
+To put it live, commit that folder and push. Railway rebuilds the AI service with the
+model baked in and loads the newest version (or the one pinned in `DISEASE_MODEL_VERSION`):
+
+```bash
+git add ai/artifacts/disease/<version> && git commit -m "Add disease model <version>" && git push
+```
 
 ## 5. Feedback → retrain
 

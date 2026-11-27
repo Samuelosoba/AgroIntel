@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     disease_model_version: str | None = None
     top_k: int = 3
 
+    # Shared secret the AgroIntel API sends as "Authorization: Bearer <token>".
+    # Unset (local dev): analysis endpoints are open.
+    ai_service_token: str | None = None
+
     # Image quality thresholds
     min_side_px: int = 224
     blur_threshold: float = 60.0  # variance of Laplacian

@@ -24,8 +24,7 @@ ml/runs/*
 !ml/data/raw/.gitkeep
 !ml/data/processed/.gitkeep
 !ml/runs/.gitkeep
-ai/artifacts/*
-!ai/artifacts/.gitkeep
+# Exported model bundles in ai/artifacts/ ARE committed: the AI service image bakes them in.
 
 # vercel
 .vercel
