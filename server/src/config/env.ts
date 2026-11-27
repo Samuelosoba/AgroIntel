@@ -8,10 +8,13 @@ const schema = z.object({
   CORS_ORIGIN: z.string().default("http://localhost:5173"),
   AI_SERVICE_URL: z.string().url().default("http://localhost:8000"),
   AI_SERVICE_TIMEOUT_MS: z.coerce.number().default(20_000),
+  // Shared secret sent to the AI service; must match AI_SERVICE_TOKEN there.
+  AI_SERVICE_TOKEN: z.string().optional(),
   CONFIDENCE_CONFIDENT: z.coerce.number().min(0).max(1).default(0.8),
   CONFIDENCE_POSSIBLE: z.coerce.number().min(0).max(1).default(0.45),
   UPLOAD_DIR: z.string().default("uploads"),
   PUBLIC_BASE_URL: z.string().default("http://localhost:4000"),
+  BLOB_READ_WRITE_TOKEN: z.string().optional(), // set by the Vercel Blob store connection
   ANTHROPIC_API_KEY: z.string().optional(),
 });
 

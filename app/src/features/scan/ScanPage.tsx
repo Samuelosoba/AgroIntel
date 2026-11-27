@@ -7,6 +7,7 @@ import type { ScanResult } from "@agrointel/shared";
 import { Button, Card, ErrorNote, SectionTitle } from "@/components/ui";
 import { api } from "@/lib/api";
 import { date, pct } from "@/lib/format";
+import { shrinkPhoto } from "@/lib/photo";
 import { useCrops, useFarms, useScans } from "@/lib/queries";
 import { PhotoTips } from "./PhotoTips";
 import { STATUS_LABEL } from "./ScanResultView";
@@ -34,7 +35,7 @@ export function ScanPage() {
   const analyze = useMutation({
     mutationFn: async () => {
       const form = new FormData();
-      form.append("image", file!);
+      form.append("image", await shrinkPhoto(file!));
       if (crop) form.append("crop", crop);
       const farm = farms.data?.find((f) => f.id === farmId);
       if (farm) {
